@@ -38,7 +38,13 @@ GSM::GSM()
      _cell.begin(9600);
 };
 #endif
-
+#ifdef NRF52
+    GSM::GSM()
+    {
+        //TODO: Add serial instance for nRF52 DK
+        //_cell.begin(9600);
+    }
+#endif
 
 int GSM::begin(long baud_rate)
 {
@@ -66,7 +72,12 @@ int GSM::begin(long baud_rate)
           if (AT_RESP_ERR_NO_RESP == SendATCmdWaitResp(str_at, 500, 100, str_ok, 5)&&!turnedON) {		//check power
                // there is no response => turn on the module
 #ifdef DEBUG_ON
+    #ifdef NRF52
+              printf("DB:NO RESP\n");
+    #elif
                Serial.println(F("DB:NO RESP"));
+    #endif
+
 #endif
                // generate turn on pulse
                digitalWrite(GSM_ON, HIGH);
@@ -76,7 +87,11 @@ int GSM::begin(long baud_rate)
                WaitResp(1000, 1000);
           } else {
 #ifdef DEBUG_ON
+    #ifdef NRF52
+              printf("DB:ELSE\n");
+    #elif
                Serial.println(F("DB:ELSE"));
+    #endif
 #endif
                WaitResp(1000, 1000);
           }
@@ -85,7 +100,6 @@ int GSM::begin(long baud_rate)
 
      if (AT_RESP_OK == SendATCmdWaitResp(str_at, 500, 100, str_ok, 5)) {
 #ifdef DEBUG_ON
-          Serial.println(F("DB:CORRECT BR"));
 #endif
           turnedON=true;
           norep=false;
@@ -94,7 +108,11 @@ int GSM::begin(long baud_rate)
 
      if (AT_RESP_ERR_DIF_RESP == SendATCmdWaitResp(str_at, 500, 100, str_ok, 5)&&!turnedON) {		//check OK
 #ifdef DEBUG_ON
+    #ifdef NRF52
+        printf("DB:AUTO BAUD RATE\n");
+    #elif
           Serial.println(F("DB:AUTO BAUD RATE"));
+    #endif
 #endif
           for (int i=0; i<8; i++) {
                switch (i) {
@@ -146,6 +164,11 @@ int GSM::begin(long baud_rate)
 
                if (AT_RESP_OK == SendATCmdWaitResp(str_at, 500, 100, str_ok, 5)) {
 #ifdef DEBUG_ON
+    #ifdef NRF52
+                    printf("DB:FOUND PREV BR\n");
+    #elif
+                    Serial.println(F("DB:FOUND PREV BR"));
+    #endif
                     Serial.println(F("DB:FOUND PREV BR"));
 #endif
                     _cell.print("AT+IPR=");
@@ -156,14 +179,23 @@ int GSM::begin(long baud_rate)
                     delay(100);
                     if (AT_RESP_OK == SendATCmdWaitResp(str_at, 500, 100, str_ok, 5)) {
 #ifdef DEBUG_ON
+    #ifdef NRF52
+                         printf("DB:OK BR\n");
+    #elif
                          Serial.println(F("DB:OK BR"));
+    #endif
 #endif
                     }
                     turnedON=true;
                     break;
                }
 #ifdef DEBUG_ON
-               Serial.println(F("DB:NO BR"));
+    #ifdef NRF52
+                printf("DB:NO BR\n");
+    #elif
+                Serial.println(F("DB:NO BR"));
+    #endif
+
 #endif
           }
           // communication line is not used yet = free
@@ -645,10 +677,17 @@ byte GSM::IsStringReceived(char const *compare_string)
           	#endif
           */
 #ifdef DEBUG_ON
-          Serial.print("ATT: ");
-          Serial.println(compare_string);
-          Serial.print("RIC: ");
-          Serial.println((char *)comm_buf);
+    #ifdef NRF52
+          printf("ATT: ");
+          printf(compare_string);
+          printf("RIC: ");
+          printf((char *)comm_buf);
+    #elif
+         Serial.print("ATT: ");
+         Serial.println(compare_string);
+         Serial.print("RIC: ");
+         Serial.println((char *)comm_buf);
+    #endif
 #endif
           ch = strstr((char *)comm_buf, compare_string);
           if (ch != NULL) {
@@ -666,9 +705,15 @@ byte GSM::IsStringReceived(char const *compare_string)
           }
      } else {
 #ifdef DEBUG_ON
-          Serial.print(F("ATT: "));
-          Serial.println(compare_string);
-          Serial.print(F("RIC: NO STRING RCVD"));
+    #ifdef NRF52
+         printf("ATT: ");
+         printf(compare_string);
+         printf("RIC: NO STRING RCVD");
+    #elif
+         Serial.print(F("ATT: "));
+         Serial.println(compare_string);
+         Serial.print(F("RIC: NO STRING RCVD"));
+    #endif
 #endif
      }
 

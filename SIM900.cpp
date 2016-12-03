@@ -109,13 +109,21 @@ int SIMCOM900::read(char* result, int resultlength)
      int i=0;
 
 #ifdef DEBUG_ON
+    #ifdef NRF52
+     printf("Starting read..\nWaiting for Data..\n");
+    #elif
      Serial.print(F("Starting read..\nWaiting for Data.."));
+    #endif
 #endif
      // Wait until we start receiving data
      while(gsm.available()<1) {
           delay(100);
 #ifdef DEBUG_ON
+    #ifdef NRF52
+          printf(".");
+    #elif
           Serial.print(F("."));
+    #endif
 #endif
      }
 
@@ -123,7 +131,11 @@ int SIMCOM900::read(char* result, int resultlength)
           temp=_cell.read();
           if(temp>0) {
 #ifdef DEBUG_ON
-               Serial.print(temp);
+    #ifdef NRF52
+              printf(temp);
+    #elif
+              Serial.print(temp);
+    #endif
 #endif
                result[i]=temp;
                i++;
@@ -135,7 +147,11 @@ int SIMCOM900::read(char* result, int resultlength)
      result[resultlength-1]='\0';
 
 #ifdef DEBUG_ON
+    #ifdef NRF52
+     printf("\nDone..\n");
+    #elif
      Serial.println(F("\nDone.."));
+    #endif
 #endif
      return i;
 }
