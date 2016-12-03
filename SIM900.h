@@ -1,7 +1,11 @@
 #ifndef SIMCOM900_H
 #define SIMCOM900_H
-#include <SoftwareSerial.h>
-#include "HWSerial.h"
+#ifdef NRF52
+    //Add serial library for nRF52 DK
+#elif
+    #include <SoftwareSerial.h>
+    #include "HWSerial.h"
+#endif
 #include "GSM.h"
 class SIMCOM900 : public virtual GSM {
 
