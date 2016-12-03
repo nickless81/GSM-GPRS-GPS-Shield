@@ -19,8 +19,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #ifndef ARDUINO_STREAMING
 #define ARDUINO_STREAMING
-
-#include <Arduino.h>
+#ifndef NRF52
+    #include <Arduino.h>
+#endif
 #include "LOG.h"
 
 #define __ST_LOG_LEVEL 3

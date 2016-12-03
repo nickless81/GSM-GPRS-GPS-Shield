@@ -2,9 +2,10 @@
 #define WideTextFinder_h
 
 //#include <WProgram.h>
-#include <Arduino.h>
-#include <SoftwareSerial.h>
-
+#ifndef NRF52
+    #include <Arduino.h>
+    #include <SoftwareSerial.h>
+#endif
 
 class WideTextFinder {
 private:

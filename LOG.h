@@ -7,7 +7,9 @@
 
 #ifndef LOG_h
 #define LOG_h
-#include "Arduino.h"
+#ifndef NRF52
+    #include <Arduino.h>
+#endif
 
 class LOG {
 public:
