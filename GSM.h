@@ -1,11 +1,13 @@
 #ifndef GSM_H
 #define GSM_H
 
-#define UNO
+//#define UNO
 //#define MEGA
-
+#define NRF52
+#ifndef NRF52
 #include <SoftwareSerial.h>
 #include <inttypes.h>
+#endif
 #include "WideTextFinder.h"
 
 
@@ -188,6 +190,9 @@ protected:
 #endif
 #ifdef UNO
      SoftwareSerial _cell;
+#endif
+#ifdef NRF52
+     //TODO: Add serial instance for nRF52 DK
 #endif
      int isIP(const char* cadena);
 
