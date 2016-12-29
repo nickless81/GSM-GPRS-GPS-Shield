@@ -111,7 +111,7 @@ int SIMCOM900::read(char* result, int resultlength)
 #ifdef DEBUG_ON
     #ifdef NRF52
      printf("Starting read..\nWaiting for Data..\n");
-    #elif
+    #else
      Serial.print(F("Starting read..\nWaiting for Data.."));
     #endif
 #endif
@@ -121,7 +121,7 @@ int SIMCOM900::read(char* result, int resultlength)
 #ifdef DEBUG_ON
     #ifdef NRF52
           printf(".");
-    #elif
+    #else
           Serial.print(F("."));
     #endif
 #endif
@@ -133,7 +133,7 @@ int SIMCOM900::read(char* result, int resultlength)
 #ifdef DEBUG_ON
     #ifdef NRF52
               printf(temp);
-    #elif
+    #else
               Serial.print(temp);
     #endif
 #endif
@@ -149,7 +149,7 @@ int SIMCOM900::read(char* result, int resultlength)
 #ifdef DEBUG_ON
     #ifdef NRF52
      printf("\nDone..\n");
-    #elif
+    #else
      Serial.println(F("\nDone.."));
     #endif
 #endif

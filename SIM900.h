@@ -2,7 +2,7 @@
 #define SIMCOM900_H
 #ifdef NRF52
     //Add serial library for nRF52 DK
-#elif
+#else
     #include <SoftwareSerial.h>
     #include "HWSerial.h"
 #endif

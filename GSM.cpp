@@ -74,7 +74,7 @@ int GSM::begin(long baud_rate)
 #ifdef DEBUG_ON
     #ifdef NRF52
               printf("DB:NO RESP\n");
-    #elif
+    #else
                Serial.println(F("DB:NO RESP"));
     #endif
 
@@ -89,7 +89,7 @@ int GSM::begin(long baud_rate)
 #ifdef DEBUG_ON
     #ifdef NRF52
               printf("DB:ELSE\n");
-    #elif
+    #else
                Serial.println(F("DB:ELSE"));
     #endif
 #endif
@@ -110,7 +110,7 @@ int GSM::begin(long baud_rate)
 #ifdef DEBUG_ON
     #ifdef NRF52
         printf("DB:AUTO BAUD RATE\n");
-    #elif
+    #else
           Serial.println(F("DB:AUTO BAUD RATE"));
     #endif
 #endif
@@ -166,7 +166,7 @@ int GSM::begin(long baud_rate)
 #ifdef DEBUG_ON
     #ifdef NRF52
                     printf("DB:FOUND PREV BR\n");
-    #elif
+    #else
                     Serial.println(F("DB:FOUND PREV BR"));
     #endif
                     Serial.println(F("DB:FOUND PREV BR"));
@@ -181,7 +181,7 @@ int GSM::begin(long baud_rate)
 #ifdef DEBUG_ON
     #ifdef NRF52
                          printf("DB:OK BR\n");
-    #elif
+    #else
                          Serial.println(F("DB:OK BR"));
     #endif
 #endif
@@ -192,7 +192,7 @@ int GSM::begin(long baud_rate)
 #ifdef DEBUG_ON
     #ifdef NRF52
                 printf("DB:NO BR\n");
-    #elif
+    #else
                 Serial.println(F("DB:NO BR"));
     #endif
 
@@ -682,7 +682,7 @@ byte GSM::IsStringReceived(char const *compare_string)
           printf(compare_string);
           printf("RIC: ");
           printf((char *)comm_buf);
-    #elif
+    #else
          Serial.print("ATT: ");
          Serial.println(compare_string);
          Serial.print("RIC: ");
@@ -709,7 +709,7 @@ byte GSM::IsStringReceived(char const *compare_string)
          printf("ATT: ");
          printf(compare_string);
          printf("RIC: NO STRING RCVD");
-    #elif
+    #else
          Serial.print(F("ATT: "));
          Serial.println(compare_string);
          Serial.print(F("RIC: NO STRING RCVD"));

@@ -49,7 +49,7 @@ char SMSGSM::SendSMS(char *number_str, char *message_str)
 #ifdef DEBUG_ON
     #ifdef NRF52
           printf("DEBUG:SMS TEST\n");
-    #elif
+    #else
           Serial.println("DEBUG:SMS TEST");
     #endif
 #endif
@@ -59,7 +59,7 @@ char SMSGSM::SendSMS(char *number_str, char *message_str)
 #ifdef DEBUG_ON
     #ifdef NRF52
               printf("DEBUG:>\n");
-    #elif
+    #else
               Serial.println("DEBUG:>");
     #endif
 #endif

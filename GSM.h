@@ -1,9 +1,9 @@
 #ifndef GSM_H
 #define GSM_H
 
-//#define UNO
+#define UNO
 //#define MEGA
-#define NRF52
+//#define NRF52
 #ifndef NRF52
 #include <SoftwareSerial.h>
 #include <inttypes.h>
